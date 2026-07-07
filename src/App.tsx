@@ -1,15 +1,23 @@
 import { useState } from "react";
 import "./App.css";
+import axios, { AxiosError, type AxiosResponse } from "axios";
 
-function App() {
+type ApiResponse = {
+  exists: boolean;
+};
+
+const App = () => {
   const [palabra, setPalabra] = useState<string>("");
   const [listaPalabras, setListaPalabras] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const handlePalabra = (e: string) => {
+  const handlePalabra = async (e: string) => {
     console.log(e);
 
-    if (!soloLetras(e)) {
+    const { exists } = await existeLaPalabra(e);
+    // TODO: Sacar a un service
+
+    if (!soloLetras(e) || !exists) {
       return setError("Ingrese palabras válidas");
     }
 
@@ -19,9 +27,18 @@ function App() {
     setError(null);
   };
 
-  const soloLetras = (str: string) => {
+  // TODO: Sacar a un service
+  const soloLetras = (str: string): boolean => {
     const regex = /^[A-Za-z]+$/;
     return regex.test(str);
+  };
+
+  // TODO: Sacar a un service
+  const existeLaPalabra = async (str: string): Promise<ApiResponse> => {
+    return await axios
+      .get(`https://word-api-hmlg.vercel.app/api/validate?word=${str}`)
+      .then((response: AxiosResponse<ApiResponse>) => response.data)
+      .catch((err: AxiosError) => Promise.reject(err.response?.data));
   };
 
   return (
@@ -43,12 +60,12 @@ function App() {
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <ul>
-        {listaPalabras.map((palabra, index) => (
+        {listaPalabras.map((palabra: string, index: number) => (
           <li key={index}>{palabra}</li>
         ))}
       </ul>
     </>
   );
-}
+};
 
 export default App;
