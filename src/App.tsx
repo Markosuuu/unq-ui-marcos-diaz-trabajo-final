@@ -10,6 +10,11 @@ const App = () => {
   const [segundos, setSegundos] = useState<number>(15);
   const [isActivo, setIsActivo] = useState<boolean>(false);
 
+  const puntaje = listaPalabras.reduce(
+    (acc, palabra) => acc + palabra.length,
+    0,
+  );
+
   useEffect(() => {
     if (!isActivo) return;
 
@@ -84,7 +89,10 @@ const App = () => {
       </ul>
 
       {segundos === 0 && (
-        <button onClick={handleReiniciar}>Otra partida</button>
+        <div>
+          <span>Puntaje final: {puntaje}</span>
+          <button onClick={handleReiniciar}>Otra partida</button>
+        </div>
       )}
     </>
   );
