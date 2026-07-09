@@ -1,14 +1,5 @@
 import axios, { AxiosError, type AxiosResponse } from "axios";
-
-type ApiResponse = {
-  exists: boolean;
-};
-
-type ResultadoValidacion = {
-  valido: boolean;
-  error?: string;
-  palabra?: string;
-};
+import type { ApiResponse, ResultadoValidacion } from "../types/types";
 
 export const existeLaPalabra = async (str: string): Promise<boolean> => {
   return await axios

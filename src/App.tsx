@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { validarPalabra } from "./services/palabrasService";
-
-interface LeaderBoardItem {
-  nombre: string;
-  puntaje: number;
-}
+import type { LeaderBoardItem } from "./types/types";
 
 const App = () => {
   const [palabra, setPalabra] = useState<string>("");
@@ -46,6 +42,7 @@ const App = () => {
     if (!isActivo) return;
 
     if (segundos === 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsActivo(false);
       return;
     }
