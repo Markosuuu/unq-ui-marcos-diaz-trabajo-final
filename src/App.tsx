@@ -1,11 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import {
-  existeLaPalabra,
-  soloLetras,
-  reglaEncadenamiento,
-  formalizarPalabra,
-} from "./services/palabrasService";
+import { validarPalabra } from "./services/palabrasService";
 
 const App = () => {
   const [palabra, setPalabra] = useState<string>("");
@@ -15,34 +10,13 @@ const App = () => {
   const handlePalabra = async (palabra: string) => {
     setPalabra("");
 
-    const palabraFormateada = formalizarPalabra(palabra);
+    const resultado = await validarPalabra(palabra, listaPalabras);
 
-    if (!soloLetras(palabraFormateada))
-      return setError("Ingrese palabras válidas.");
-
-    if (listaPalabras.includes(palabraFormateada))
-      return setError("La palabra ya fue ingresada.");
-
-    if (
-      listaPalabras.length > 0 &&
-      reglaEncadenamiento(
-        palabraFormateada,
-        listaPalabras[listaPalabras.length - 1],
-      )
-    ) {
-      return setError("La palabra no respeta la regla de encadenamiento.");
+    if (!resultado.valido) {
+      return setError(resultado.error || "Error desconocido");
     }
 
-    try {
-      const existe = await existeLaPalabra(palabraFormateada);
-
-      if (!existe) return setError("La palabra no existe.");
-    } catch {
-      return setError("Error al verificar la palabra");
-    }
-
-    setListaPalabras([...listaPalabras, palabra]);
-
+    setListaPalabras([...listaPalabras, resultado.palabra || ""]);
     setError(null);
   };
 
