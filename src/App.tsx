@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { validarPalabra } from "./services/palabrasService";
 
+interface LeaderBoardItem {
+  nombre: string;
+  puntaje: number;
+}
+
 const App = () => {
   const [palabra, setPalabra] = useState<string>("");
   const [listaPalabras, setListaPalabras] = useState<string[]>([]);
@@ -9,6 +14,28 @@ const App = () => {
 
   const [segundos, setSegundos] = useState<number>(15);
   const [isActivo, setIsActivo] = useState<boolean>(false);
+
+  const [nombre, setNombre] = useState<string>(""); // este quizás está al dope
+  const [leaderBoard, setLeaderBoard] = useState<LeaderBoardItem[]>(() => {
+    const leaderBoardTemp = localStorage.getItem("leaderBoard");
+    return leaderBoardTemp ? JSON.parse(leaderBoardTemp) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("leaderBoard", JSON.stringify(leaderBoard));
+  }, [leaderBoard]);
+
+  const actualizarLeaderBoard = () => {
+    const nuevoPuntaje = { nombre: nombre, puntaje };
+
+    setLeaderBoard((prev: LeaderBoardItem[]) => {
+      const actualizado = [...prev, nuevoPuntaje]
+        .sort((a: LeaderBoardItem, b: LeaderBoardItem) => b.puntaje - a.puntaje)
+        .slice(0, 10);
+
+      return actualizado;
+    });
+  };
 
   const puntaje = listaPalabras.reduce(
     (acc, palabra) => acc + palabra.length,
@@ -91,9 +118,38 @@ const App = () => {
       {segundos === 0 && (
         <div>
           <span>Puntaje final: {puntaje}</span>
+
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              actualizarLeaderBoard();
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Ingrese su nombre..."
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+            />
+            <button type="submit">Guardar puntaje</button>
+            {/* TODO: Desaparecer botón una vez enviado & no aceptar nulos */}
+          </form>
+
           <button onClick={handleReiniciar}>Otra partida</button>
         </div>
       )}
+      <hr />
+      {/* Sacar compo */}
+      <div>
+        <h2>LeaderBoard</h2>
+        <ul>
+          {leaderBoard.map((item: LeaderBoardItem, index: number) => (
+            <li key={index}>
+              {item.nombre} - {item.puntaje} puntos
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 };
