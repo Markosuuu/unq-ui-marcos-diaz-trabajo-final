@@ -4,6 +4,7 @@ import {
   existeLaPalabra,
   soloLetras,
   reglaEncadenamiento,
+  formalizarPalabra,
 } from "./services/palabrasService";
 
 const App = () => {
@@ -14,20 +15,26 @@ const App = () => {
   const handlePalabra = async (palabra: string) => {
     setPalabra("");
 
-    if (!soloLetras(palabra)) return setError("Ingrese palabras válidas.");
+    const palabraFormateada = formalizarPalabra(palabra);
 
-    if (listaPalabras.includes(palabra))
+    if (!soloLetras(palabraFormateada))
+      return setError("Ingrese palabras válidas.");
+
+    if (listaPalabras.includes(palabraFormateada))
       return setError("La palabra ya fue ingresada.");
 
     if (
       listaPalabras.length > 0 &&
-      reglaEncadenamiento(palabra, listaPalabras[listaPalabras.length - 1])
+      reglaEncadenamiento(
+        palabraFormateada,
+        listaPalabras[listaPalabras.length - 1],
+      )
     ) {
       return setError("La palabra no respeta la regla de encadenamiento.");
     }
 
     try {
-      const existe = await existeLaPalabra(palabra);
+      const existe = await existeLaPalabra(palabraFormateada);
 
       if (!existe) return setError("La palabra no existe.");
     } catch {

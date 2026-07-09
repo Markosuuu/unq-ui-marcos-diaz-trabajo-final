@@ -24,3 +24,10 @@ export const reglaEncadenamiento = (
 ): boolean => {
   return ultimaPalabra.slice(-1) !== palabra[0];
 };
+
+export const formalizarPalabra = (palabra: string): string => {
+  return palabra
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+};
