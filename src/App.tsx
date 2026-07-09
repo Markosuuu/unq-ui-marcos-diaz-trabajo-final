@@ -12,6 +12,9 @@ const App = () => {
 
     if (!soloLetras(palabra)) return setError("Ingrese palabras válidas");
 
+    if (listaPalabras.includes(palabra))
+      return setError("La palabra ya fue ingresada");
+
     try {
       const existe = await existeLaPalabra(palabra);
 
