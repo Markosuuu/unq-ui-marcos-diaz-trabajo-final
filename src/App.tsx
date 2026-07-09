@@ -1,44 +1,28 @@
 import { useState } from "react";
 import "./App.css";
-import axios, { AxiosError, type AxiosResponse } from "axios";
-
-type ApiResponse = {
-  exists: boolean;
-};
+import { existeLaPalabra, soloLetras } from "./services/palabrasService";
 
 const App = () => {
   const [palabra, setPalabra] = useState<string>("");
   const [listaPalabras, setListaPalabras] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const handlePalabra = async (e: string) => {
-    console.log(e);
+  const handlePalabra = async (palabra: string) => {
+    setPalabra("");
 
-    const { exists } = await existeLaPalabra(e);
-    // TODO: Sacar a un service
+    if (!soloLetras(palabra)) return setError("Ingrese palabras válidas");
 
-    if (!soloLetras(e) || !exists) {
-      return setError("Ingrese palabras válidas");
+    try {
+      const existe = await existeLaPalabra(palabra);
+
+      if (!existe) return setError("No existe esa palabra en el diccionario");
+    } catch {
+      return setError("Error al verificar la palabra");
     }
 
-    setListaPalabras([...listaPalabras, e]);
+    setListaPalabras([...listaPalabras, palabra]);
 
-    setPalabra("");
     setError(null);
-  };
-
-  // TODO: Sacar a un service
-  const soloLetras = (str: string): boolean => {
-    const regex = /^[A-Za-z]+$/;
-    return regex.test(str);
-  };
-
-  // TODO: Sacar a un service
-  const existeLaPalabra = async (str: string): Promise<ApiResponse> => {
-    return await axios
-      .get(`https://word-api-hmlg.vercel.app/api/validate?word=${str}`)
-      .then((response: AxiosResponse<ApiResponse>) => response.data)
-      .catch((err: AxiosError) => Promise.reject(err.response?.data));
   };
 
   return (
