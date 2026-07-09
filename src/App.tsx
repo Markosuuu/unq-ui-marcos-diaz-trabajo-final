@@ -23,7 +23,7 @@ const App = () => {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [isActivo, segundos]); // TODO: Botón para iniciar devuelta el contador
+  }, [isActivo, segundos]);
 
   const handlePalabra = async (palabra: string) => {
     setPalabra("");
@@ -40,6 +40,13 @@ const App = () => {
 
     setListaPalabras([...listaPalabras, resultado.palabra || ""]);
     setSegundos(15);
+    setError(null);
+  };
+
+  const handleReiniciar = () => {
+    setSegundos(15);
+    setIsActivo(false);
+    setListaPalabras([]);
     setError(null);
   };
 
@@ -75,6 +82,10 @@ const App = () => {
           <li key={index}>{palabra}</li>
         ))}
       </ul>
+
+      {segundos === 0 && (
+        <button onClick={handleReiniciar}>Otra partida</button>
+      )}
     </>
   );
 };
