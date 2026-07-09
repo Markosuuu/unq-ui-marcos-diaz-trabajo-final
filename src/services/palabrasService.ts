@@ -17,3 +17,10 @@ export const soloLetras = (str: string): boolean => {
   const regex = /^[A-Za-z]+$/;
   return regex.test(str);
 };
+
+export const reglaEncadenamiento = (
+  palabra: string,
+  ultimaPalabra: string,
+): boolean => {
+  return ultimaPalabra.slice(-1) !== palabra[0];
+};
