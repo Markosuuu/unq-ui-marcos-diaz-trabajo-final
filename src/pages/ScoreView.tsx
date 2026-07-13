@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import type { LeaderBoardItem } from "../types/types";
 import Leaderboard from "../components/Leaderboard";
 import style from "../styles/scoreView.module.css";
+import { toast } from "react-toastify";
 
 const ScoreView = () => {
   const puntaje = Number(localStorage.getItem("puntaje") || 0);
@@ -13,8 +14,21 @@ const ScoreView = () => {
     return leaderBoardTemp ? JSON.parse(leaderBoardTemp) : [];
   });
 
+  const [enviado, setEnviado] = useState<boolean>(false);
+
+  useEffect(() => {
+    localStorage.setItem("leaderBoard", JSON.stringify(leaderBoard));
+  }, [leaderBoard]);
+
   const actualizarLeaderBoard = () => {
+    if (nombre === "") {
+      toast.error("Ingrese su nombre por favor");
+      return;
+    }
+
     const nuevoPuntaje: LeaderBoardItem = { nombre, puntaje };
+
+    setEnviado(true);
 
     setLeaderBoard((prev: LeaderBoardItem[]) => {
       const actualizado = [...prev, nuevoPuntaje]
@@ -25,6 +39,10 @@ const ScoreView = () => {
     });
   };
 
+  const mostrarNuevoTop =
+    leaderBoard.length == 0 ||
+    (leaderBoard[leaderBoard.length - 1].puntaje < puntaje && !enviado);
+
   return (
     <main>
       <article className={style["score-container"]}>
@@ -32,35 +50,37 @@ const ScoreView = () => {
           <h1>Tiempo finalizado</h1>
           <span>Tu puntaje final fue: {puntaje}</span>
 
-          <div hidden={leaderBoard[9].puntaje > puntaje}>
+          {mostrarNuevoTop && (
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 actualizarLeaderBoard();
               }}
-              className="form-palabra"
+              className={style["form-nombre"]}
             >
               <input
                 type="text"
                 placeholder="Ingrese su nombre..."
-                className="ingresar-palabra"
+                className={style["ingresar-nombre"]}
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
               />
-              <button type="submit" className="btn-palabra">
+              <button type="submit" className={style["btn-nombre"]}>
                 Guardar puntaje
               </button>
-              {/* TODO: Desaparecer botón una vez enviado & no aceptar nulos */}
             </form>
-          </div>
+          )}
 
           <Link to={"/"} className={style["btn-reiniciar"]}>
             Otra partida
           </Link>
         </section>
-        <aside className={style["leaderBoard"]}>
-          <Leaderboard leaderBoard={leaderBoard} />
-        </aside>
+
+        {leaderBoard.length != 0 && (
+          <aside className={style["leaderBoard"]}>
+            <Leaderboard leaderBoard={leaderBoard} />
+          </aside>
+        )}
       </article>
     </main>
   );
