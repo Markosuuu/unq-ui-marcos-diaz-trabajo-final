@@ -23,13 +23,24 @@ const Game = () => {
     localStorage.setItem("leaderBoard", JSON.stringify(leaderBoard));
   }, [leaderBoard]);
 
+  const puntaje = () => {
+    return listaPalabras.reduce(
+      (acc: number, palabra: string) => acc + palabra.length,
+      0,
+    );
+  };
+
   useEffect(() => {
     if (!isActivo) return;
 
     if (segundos === 0) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsActivo(false);
-      navigate("/score");
+      navigate("/score", {
+        state: {
+          puntaje: puntaje(),
+        },
+      });
     }
 
     const timer = setTimeout(() => {
@@ -37,7 +48,7 @@ const Game = () => {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [isActivo, navigate, segundos]);
+  }, [isActivo, segundos]);
 
   const handlePalabra = async (palabra: string) => {
     setPalabra("");
@@ -56,13 +67,6 @@ const Game = () => {
     setListaPalabras([...listaPalabras, resultado.palabra || ""]);
     setSegundos(15);
   };
-
-  const puntaje = listaPalabras.reduce(
-    (acc: number, palabra: string) => acc + palabra.length,
-    0,
-  );
-
-  localStorage.setItem("puntaje", puntaje.toString());
 
   return (
     <main>

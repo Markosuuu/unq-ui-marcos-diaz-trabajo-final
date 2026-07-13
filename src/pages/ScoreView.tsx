@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import type { LeaderBoardItem } from "../types/types";
 import Leaderboard from "../components/Leaderboard";
 import style from "../styles/scoreView.module.css";
 import { toast } from "react-toastify";
 
+// TODO: Bug que al reiniciar te deja enviar nuevamente el puntaje
 const ScoreView = () => {
-  const puntaje = Number(localStorage.getItem("puntaje") || 0);
+  const location = useLocation();
+  const { puntaje } = location.state ?? {};
 
   const [nombre, setNombre] = useState<string>("");
   const [leaderBoard, setLeaderBoard] = useState<LeaderBoardItem[]>(() => {
@@ -41,7 +43,7 @@ const ScoreView = () => {
 
   const mostrarNuevoTop =
     leaderBoard.length == 0 ||
-    (leaderBoard[leaderBoard.length - 1].puntaje < puntaje && !enviado);
+    (leaderBoard[leaderBoard.length - 1].puntaje <= puntaje && !enviado);
 
   return (
     <main>
