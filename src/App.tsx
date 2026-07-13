@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { validarPalabra } from "./services/palabrasService";
 import type { LeaderBoardItem } from "./types/types";
-import Leaderboard from "./components/Leaderboard";
 
 const App = () => {
   const [palabra, setPalabra] = useState<string>("");
@@ -82,63 +81,72 @@ const App = () => {
 
   return (
     <>
-      <div className="timer">
-        {segundos !== 0 ? (
-          <span>{segundos}</span>
-        ) : (
-          <span>Tiempo finalizado</span>
-        )}
-      </div>
-      {segundos !== 0 && (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handlePalabra(palabra);
-          }}
-        >
-          <input
-            type="text"
-            placeholder="Ingrese una palabra..."
-            value={palabra}
-            onChange={(e) => setPalabra(e.target.value)}
-          />
-          <button type="submit">Enviar</button>
-        </form>
-      )}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      <ul>
-        {listaPalabras.map((palabra: string, index: number) => (
-          <li key={index}>{palabra}</li>
-        ))}
-      </ul>
-
-      {segundos === 0 && (
-        <div>
-          <span>Puntaje final: {puntaje}</span>
-
+      <main className="main-container">
+        <div className="timer">
+          {segundos !== 0 ? (
+            <span>{segundos}</span>
+          ) : (
+            <span>Tiempo finalizado</span>
+          )}
+        </div>
+        {segundos !== 0 && (
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              actualizarLeaderBoard();
+              handlePalabra(palabra);
             }}
+            className="form-palabra"
           >
             <input
               type="text"
-              placeholder="Ingrese su nombre..."
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
+              placeholder="Ingrese una palabra..."
+              className="ingresar-palabra"
+              value={palabra}
+              onChange={(e) => setPalabra(e.target.value)}
             />
-            <button type="submit">Guardar puntaje</button>
-            {/* TODO: Desaparecer botón una vez enviado & no aceptar nulos */}
+            <button type="submit" className="btn-palabra">
+              Enviar
+            </button>
           </form>
+        )}
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
-          <button onClick={handleReiniciar}>Otra partida</button>
-        </div>
-      )}
-      <hr />
-      {/* Sacar compo */}
-      <Leaderboard leaderBoard={leaderBoard} />
+        <ul>
+          {listaPalabras.map((palabra: string, index: number) => (
+            <li key={index}>{palabra}</li>
+          ))}
+        </ul>
+
+        {segundos === 0 && (
+          <div>
+            <span>Puntaje final: {puntaje}</span>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                actualizarLeaderBoard();
+              }}
+              className="form-palabra"
+            >
+              <input
+                type="text"
+                placeholder="Ingrese su nombre..."
+                className="ingresar-palabra"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+              />
+              <button type="submit" className="btn-palabra">
+                Guardar puntaje
+              </button>
+              {/* TODO: Desaparecer botón una vez enviado & no aceptar nulos */}
+            </form>
+
+            <button onClick={handleReiniciar} className="btn-reiniciar">
+              Otra partida
+            </button>
+          </div>
+        )}
+      </main>
     </>
   );
 };
