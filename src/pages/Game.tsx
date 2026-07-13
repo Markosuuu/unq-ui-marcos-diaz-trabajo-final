@@ -3,11 +3,11 @@ import "../App.css";
 import { validarPalabra } from "../services/palabrasService";
 import type { LeaderBoardItem } from "../types/types";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const Game = () => {
   const [palabra, setPalabra] = useState<string>("");
   const [listaPalabras, setListaPalabras] = useState<string[]>([]);
-  const [error, setError] = useState<string | null>(null);
 
   const [segundos, setSegundos] = useState<number>(15);
   const [isActivo, setIsActivo] = useState<boolean>(false);
@@ -45,7 +45,8 @@ const Game = () => {
     const resultado = await validarPalabra(palabra, listaPalabras);
 
     if (!resultado.valido) {
-      return setError(resultado.error || "Error desconocido");
+      toast.error(resultado.error || "Error desconocido");
+      return;
     }
 
     if (listaPalabras.length === 0) {
@@ -54,7 +55,6 @@ const Game = () => {
 
     setListaPalabras([...listaPalabras, resultado.palabra || ""]);
     setSegundos(15);
-    setError(null);
   };
 
   const puntaje = listaPalabras.reduce(
@@ -87,8 +87,6 @@ const Game = () => {
           </button>
         </form>
       )}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
       <ul>
         {listaPalabras.map((palabra: string, index: number) => (
           <li key={index}>{palabra}</li>
