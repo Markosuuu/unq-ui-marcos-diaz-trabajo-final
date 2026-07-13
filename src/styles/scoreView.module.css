@@ -1,0 +1,38 @@
+.score-container {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 16px;
+}
+
+.section-puntaje {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 30px;
+  text-align: center;
+  border: 1px solid #2196f3;
+}
+
+.btn-reiniciar {
+  background-color: #3672f4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+.btn-reiniciar:hover {
+  background-color: #2196f3;
+}
+
+.leaderBoard {
+  padding: 20px 30px;
+  border: 1px solid #2196f3;
+}
+
+.leaderBoard ul {
+  list-style: none;
+}

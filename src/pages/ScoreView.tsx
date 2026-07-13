@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import type { LeaderBoardItem } from "../types/types";
 import Leaderboard from "../components/Leaderboard";
+import style from "../styles/scoreView.module.css";
 
 const ScoreView = () => {
   const puntaje = Number(localStorage.getItem("puntaje") || 0);
@@ -25,39 +26,42 @@ const ScoreView = () => {
   };
 
   return (
-    <main className="main-container">
-      <div>
-        <h1>Tiempo finalizado</h1>
-        <span>Puntaje final: {puntaje}</span>
+    <main>
+      <article className={style["score-container"]}>
+        <section className={style["section-puntaje"]}>
+          <h1>Tiempo finalizado</h1>
+          <span>Tu puntaje final fue: {puntaje}</span>
 
-        <div hidden={leaderBoard[9].puntaje > puntaje}>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              actualizarLeaderBoard();
-            }}
-            className="form-palabra"
-          >
-            <input
-              type="text"
-              placeholder="Ingrese su nombre..."
-              className="ingresar-palabra"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-            />
-            <button type="submit" className="btn-palabra">
-              Guardar puntaje
-            </button>
-            {/* TODO: Desaparecer botón una vez enviado & no aceptar nulos */}
-          </form>
-        </div>
+          <div hidden={leaderBoard[9].puntaje > puntaje}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                actualizarLeaderBoard();
+              }}
+              className="form-palabra"
+            >
+              <input
+                type="text"
+                placeholder="Ingrese su nombre..."
+                className="ingresar-palabra"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+              />
+              <button type="submit" className="btn-palabra">
+                Guardar puntaje
+              </button>
+              {/* TODO: Desaparecer botón una vez enviado & no aceptar nulos */}
+            </form>
+          </div>
 
-        <Link to={"/"} className="btn-reiniciar">
-          Otra partida
-        </Link>
-        <hr />
-        <Leaderboard leaderBoard={leaderBoard} />
-      </div>
+          <Link to={"/"} className={style["btn-reiniciar"]}>
+            Otra partida
+          </Link>
+        </section>
+        <aside className={style["leaderBoard"]}>
+          <Leaderboard leaderBoard={leaderBoard} />
+        </aside>
+      </article>
     </main>
   );
 };

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../App.css";
+import style from "../styles/game.module.css";
 import { validarPalabra } from "../services/palabrasService";
 import type { LeaderBoardItem } from "../types/types";
 import { useNavigate } from "react-router";
@@ -29,7 +29,7 @@ const Game = () => {
     if (segundos === 0) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsActivo(false);
-      navigate("/leaderboard");
+      navigate("/score");
     }
 
     const timer = setTimeout(() => {
@@ -65,24 +65,26 @@ const Game = () => {
   localStorage.setItem("puntaje", puntaje.toString());
 
   return (
-    <main className="main-container">
-      <div className="timer">{segundos !== 0 && <span>{segundos}</span>}</div>
+    <main>
+      <div className={style["timer"]}>
+        {segundos !== 0 && <span>{segundos}</span>}
+      </div>
       {segundos !== 0 && (
         <form
           onSubmit={(e) => {
             e.preventDefault();
             handlePalabra(palabra);
           }}
-          className="form-palabra"
+          className={style["form-palabra"]}
         >
           <input
             type="text"
             placeholder="Ingrese una palabra..."
-            className="ingresar-palabra"
+            className={style["ingresar-palabra"]}
             value={palabra}
             onChange={(e) => setPalabra(e.target.value)}
           />
-          <button type="submit" className="btn-palabra">
+          <button type="submit" className={style["btn-palabra"]}>
             Enviar
           </button>
         </form>

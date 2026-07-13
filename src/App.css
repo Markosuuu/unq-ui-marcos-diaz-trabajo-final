@@ -7,70 +7,13 @@
 body {
   background-color: #1a1a1a;
   color: #fff;
+  font-family: "Courier New", Courier, monospace;
 }
 
-.main-container {
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-}
-
-/* Timer */
-
-.timer {
-  border: 2px solid #4caf50;
-  border-radius: 50%;
-  padding: 25px;
-  font-size: 48px;
-}
-
-/* Form ingresar palabra */
-
-.form-palabra {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  height: 50px;
-}
-
-.ingresar-palabra {
-  background-color: #333;
-  color: #fff;
-  font-size: 16px;
-  border: 1px solid #555;
-  border-radius: 8px 0 0 8px;
-  width: 320px;
-  height: 100%;
-  padding: 10px;
-}
-
-.btn-palabra {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 0 8px 8px 0;
-  padding: 10px 20px;
-  cursor: pointer;
-  height: 100%;
-}
-
-.btn-palabra:hover {
-  background-color: #45a049;
-}
-
-.btn-reiniciar {
-  background-color: #3672f4;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.btn-reiniciar:hover {
-  background-color: #2196f3;
 }

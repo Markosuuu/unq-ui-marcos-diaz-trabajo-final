@@ -1,3 +1,4 @@
+import "./App.css";
 import { Route, Routes } from "react-router";
 import Game from "./pages/Game";
 import ScoreView from "./pages/ScoreView";
@@ -9,7 +10,7 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Game />} />
-        <Route path="/leaderboard" element={<ScoreView />} />
+        <Route path="/score" element={<ScoreView />} />
         <Route path="*" element={<Game />} />
       </Routes>
       <ToastContainer
