@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { validarPalabra } from "./services/palabrasService";
 import type { LeaderBoardItem } from "./types/types";
+import Leaderboard from "./components/Leaderboard";
 
 const App = () => {
   const [palabra, setPalabra] = useState<string>("");
@@ -137,18 +138,15 @@ const App = () => {
       )}
       <hr />
       {/* Sacar compo */}
-      <div>
-        <h2>LeaderBoard</h2>
-        <ul>
-          {leaderBoard.map((item: LeaderBoardItem, index: number) => (
-            <li key={index}>
-              {item.nombre} - {item.puntaje} puntos
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Leaderboard leaderBoard={leaderBoard} />
     </>
   );
 };
 
 export default App;
+
+{
+  /* <div>
+    <img src="https://ciaccodavi.de/qbdp/acg/alchemymod.php?coloured=1&id=1180968291" />
+  </div> */
+}
