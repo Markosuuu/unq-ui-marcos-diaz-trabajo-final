@@ -1,10 +1,24 @@
+.container {
+  display: grid;
+  place-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  gap: 16px;
+}
+
+.container section {
+  background-color: #111111e6;
+  padding: 30px 50px;
+  border-radius: 12px;
+  width: 500px;
+}
+
 /* Timer */
 
 .timer {
-  border: 2px solid #4caf50;
-  border-radius: 50%;
   padding: 25px;
   font-size: 48px;
+  text-align: center;
 }
 
 /* Form ingresar palabra */
@@ -40,4 +54,16 @@
 
 .btn-palabra:hover {
   background-color: #45a049;
+}
+
+.lista-palabras {
+  background-color: #111111e6;
+  padding: 20px 50px;
+  border-radius: 12px;
+  width: 500px;
+  margin-top: 20px;
+}
+
+.lista-palabras span {
+  font-weight: 800;
 }

@@ -6,10 +6,11 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 const Game = () => {
+  const gameSecond = 2;
   const [palabra, setPalabra] = useState<string>("");
   const [listaPalabras, setListaPalabras] = useState<string[]>([]);
 
-  const [segundos, setSegundos] = useState<number>(15);
+  const [segundos, setSegundos] = useState<number>(gameSecond);
   const [isActivo, setIsActivo] = useState<boolean>(false);
 
   const [leaderBoard] = useState<LeaderBoardItem[]>(() => {
@@ -39,6 +40,7 @@ const Game = () => {
       navigate("/score", {
         state: {
           puntaje: puntaje(),
+          lista: listaPalabras,
         },
       });
     }
@@ -65,39 +67,48 @@ const Game = () => {
     }
 
     setListaPalabras([...listaPalabras, resultado.palabra || ""]);
-    setSegundos(15);
+    setSegundos(gameSecond);
   };
 
   return (
     <main>
-      <div className={style["timer"]}>
-        {segundos !== 0 && <span>{segundos}</span>}
-      </div>
-      {segundos !== 0 && (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handlePalabra(palabra);
-          }}
-          className={style["form-palabra"]}
-        >
-          <input
-            type="text"
-            placeholder="Ingrese una palabra..."
-            className={style["ingresar-palabra"]}
-            value={palabra}
-            onChange={(e) => setPalabra(e.target.value)}
-          />
-          <button type="submit" className={style["btn-palabra"]}>
-            Enviar
-          </button>
-        </form>
-      )}
-      <ul>
-        {listaPalabras.map((palabra: string, index: number) => (
-          <li key={index}>{palabra}</li>
-        ))}
-      </ul>
+      <article className={style["container"]}>
+        <h1>Palabras encadenadas</h1>
+        <section>
+          <div className={style["timer"]}>
+            {segundos !== 0 && <span>{segundos}</span>}
+          </div>
+          {segundos !== 0 && (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handlePalabra(palabra);
+              }}
+              className={style["form-palabra"]}
+            >
+              <input
+                type="text"
+                placeholder="Ingrese una palabra..."
+                className={style["ingresar-palabra"]}
+                value={palabra}
+                onChange={(e) => setPalabra(e.target.value)}
+              />
+              <button type="submit" className={style["btn-palabra"]}>
+                Enviar
+              </button>
+            </form>
+          )}
+        </section>
+        <aside className={style["lista-palabras"]}>
+          <p>
+            Última palabra ingresada:{" "}
+            <span>{listaPalabras[listaPalabras.length - 1]}</span>
+          </p>
+          <p>
+            Puntaje actual: <span>{puntaje()}</span>
+          </p>
+        </aside>
+      </article>
     </main>
   );
 };

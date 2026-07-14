@@ -1,9 +1,11 @@
 import "./App.css";
+
 import { Route, Routes } from "react-router";
-import Game from "./pages/Game";
-import ScoreView from "./pages/ScoreView";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import Game from "./pages/Game";
+import ScoreView from "./pages/ScoreView";
 
 const App = () => {
   return (

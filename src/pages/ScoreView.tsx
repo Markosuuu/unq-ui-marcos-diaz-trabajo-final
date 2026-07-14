@@ -1,26 +1,29 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, Navigate } from "react-router";
 import type { LeaderBoardItem } from "../types/types";
 import Leaderboard from "../components/Leaderboard";
 import style from "../styles/scoreView.module.css";
 import { toast } from "react-toastify";
 
-// TODO: Bug que al reiniciar te deja enviar nuevamente el puntaje
 const ScoreView = () => {
-  const location = useLocation();
-  const { puntaje } = location.state ?? {};
-
   const [nombre, setNombre] = useState<string>("");
   const [leaderBoard, setLeaderBoard] = useState<LeaderBoardItem[]>(() => {
     const leaderBoardTemp = localStorage.getItem("leaderBoard");
     return leaderBoardTemp ? JSON.parse(leaderBoardTemp) : [];
   });
-
   const [enviado, setEnviado] = useState<boolean>(false);
 
   useEffect(() => {
     localStorage.setItem("leaderBoard", JSON.stringify(leaderBoard));
   }, [leaderBoard]);
+
+  const location = useLocation();
+
+  if (location.state === null) {
+    return <Navigate to="/" replace />;
+  }
+
+  const { puntaje, lista } = location.state;
 
   const actualizarLeaderBoard = () => {
     if (nombre === "") {
@@ -42,7 +45,7 @@ const ScoreView = () => {
   };
 
   const mostrarNuevoTop =
-    leaderBoard.length == 0 ||
+    leaderBoard.length < 10 ||
     (leaderBoard[leaderBoard.length - 1].puntaje <= puntaje && !enviado);
 
   return (
@@ -83,6 +86,14 @@ const ScoreView = () => {
             <Leaderboard leaderBoard={leaderBoard} />
           </aside>
         )}
+
+        <aside className={style["lista-palabras"]}>
+          <ul>
+            {lista.map((palabra: string, index: number) => (
+              <li key={index}>{palabra}</li>
+            ))}
+          </ul>
+        </aside>
       </article>
     </main>
   );

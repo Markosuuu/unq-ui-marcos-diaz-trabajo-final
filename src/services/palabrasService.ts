@@ -53,7 +53,7 @@ export const validarPalabra = async (
   ) {
     return {
       valido: false,
-      error: "La palabra no respeta la regla de encadenamiento.",
+      error: "No respeta el encadenamiento (casA -> AvioN -> No)",
     };
   }
 
