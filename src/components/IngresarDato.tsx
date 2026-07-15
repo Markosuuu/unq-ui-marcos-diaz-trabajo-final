@@ -1,4 +1,4 @@
-import style from "../styles/game.module.css";
+import style from "../styles/form.module.css";
 
 interface IngresarDatoProp {
   handleFunc: (valor: string) => void;

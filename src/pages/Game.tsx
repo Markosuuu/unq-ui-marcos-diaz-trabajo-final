@@ -10,7 +10,7 @@ import RegistroDeJugada from "../components/RegistroDeJugada";
 import IngresarDato from "../components/IngresarDato";
 
 const Game = () => {
-  const gameSecond = 15;
+  const gameSecond = 3;
   const [palabra, setPalabra] = useState<string>("");
   const [listaPalabras, setListaPalabras] = useState<string[]>([]);
   const [puntaje, setPuntaje] = useState<number>(0);
@@ -86,7 +86,7 @@ const Game = () => {
   return (
     <main>
       <article className={style["container"]}>
-        <h1 className={style["titulo"]}>Palabras encadenadas</h1>
+        <h1>Palabras encadenadas</h1>
         <section>
           <div className={style["timer"]}>
             <span>{segundos}</span>

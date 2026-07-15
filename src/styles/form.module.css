@@ -1,0 +1,45 @@
+.form-palabra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 100%;
+}
+
+.ingresar-palabra {
+  background-color: #323c7fee;
+  border: 1px solid #0e1224;
+  border-radius: 8px 0 0 8px;
+  font-family: "AndyBold";
+  font-size: 24px;
+  color: #eee;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  outline: none;
+}
+
+.ingresar-palabra::placeholder {
+  color: #777;
+}
+
+.ingresar-palabra:hover {
+  border: 1px solid #ffe745;
+}
+
+.btn-palabra {
+  background-color: #485e9eee;
+  border: 1px solid #0e1224;
+  border-radius: 0 8px 8px 0;
+  font-family: "AndyBold";
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  height: 100%;
+  padding: 10px 20px;
+}
+
+.btn-palabra:hover {
+  background-color: #485e9e;
+  border: 1px solid #ffe745;
+}

@@ -13,20 +13,28 @@
 
 body {
   font-family: "AndyBold", sans-serif;
+  color: #fff;
 
   background-image: url("./assets/fondo.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  color: #fff;
-  /* font-family: "Courier New", Courier, monospace; */
-  /* font-family: comic; */
 }
 
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   min-height: 100vh;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+section,
+aside {
+  background-color: #2f3160ee;
+  border: 2px solid #0e1224;
+  border-radius: 8px;
 }

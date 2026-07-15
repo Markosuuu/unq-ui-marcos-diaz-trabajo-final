@@ -11,11 +11,14 @@ const Record = () => {
     const leaderBoardTemp = localStorage.getItem("leaderBoard");
     return leaderBoardTemp ? JSON.parse(leaderBoardTemp) : [];
   });
+
   useEffect(() => {
     localStorage.setItem("leaderBoard", JSON.stringify(leaderBoard));
   }, [leaderBoard]);
+
   const location = useLocation();
   const navigate = useNavigate();
+
   if (location.state === null) {
     return <Navigate to="/" replace />;
   }
@@ -49,7 +52,7 @@ const Record = () => {
   return (
     <main>
       <article className={style["container"]}>
-        <h1 className={style["titulo"]}>Palabras encadenadas</h1>
+        <h1>Palabras encadenadas</h1>
         <section>
           <h2>Nuevo record!</h2>
           <div className={style["estadisticas"]}>
