@@ -4,12 +4,14 @@ interface IngresarDatoProp {
   handleFunc: (valor: string) => void;
   valorString: string;
   setString: (valor: string) => void;
+  placerholder: string;
 }
 
 const IngresarDato = ({
   valorString,
   handleFunc,
   setString,
+  placerholder,
 }: IngresarDatoProp) => {
   return (
     <form
@@ -21,7 +23,7 @@ const IngresarDato = ({
     >
       <input
         type="text"
-        placeholder="Ingrese una palabra..."
+        placeholder={placerholder}
         className={style["ingresar-palabra"]}
         value={valorString}
         onChange={(e) => setString(e.target.value)}

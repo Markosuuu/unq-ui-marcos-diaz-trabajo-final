@@ -2,7 +2,8 @@ import { Navigate, useLocation, useNavigate } from "react-router";
 import type { LeaderBoardItem } from "../types/types";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-import style from "../styles/scoreView.module.css";
+import style from "../styles/record.module.css";
+import IngresarDato from "../components/IngresarDato";
 
 const Record = () => {
   const [nombre, setNombre] = useState<string>("");
@@ -47,29 +48,34 @@ const Record = () => {
 
   return (
     <main>
-      <div>
-        <h1>Nuevo record!</h1>
-        <p>Ingrese su nombre para registrarlo en el top</p>
-        <p>Puntaje: {puntaje}</p>
-      </div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          actualizarLeaderBoard();
-        }}
-        className={style["form-nombre"]}
-      >
-        <input
-          type="text"
-          placeholder="Ingrese su nombre..."
-          className={style["ingresar-nombre"]}
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-        />
-        <button type="submit" className={style["btn-nombre"]}>
-          Guardar puntaje
-        </button>
-      </form>
+      <article className={style["container"]}>
+        <h1 className={style["titulo"]}>Palabras encadenadas</h1>
+        <section>
+          <h2>Nuevo record!</h2>
+          <div className={style["estadisticas"]}>
+            <span>
+              <img
+                src="https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3f/Large_world_icon.png/revision/latest?cb=20200921104250&format=original"
+                alt=""
+              />
+              Puntaje: {puntaje}
+            </span>
+            <span>
+              <img
+                src="https://static.wikia.nocookie.net/terraria_gamepedia/images/2/25/World_seed_icon.png/revision/latest?cb=20200921104226&format=original"
+                alt=""
+              />
+              Cantidad de palabras: {lista.length}
+            </span>
+          </div>
+          <IngresarDato
+            handleFunc={actualizarLeaderBoard}
+            valorString={nombre}
+            setString={setNombre}
+            placerholder={"Ingrese su nick..."}
+          />
+        </section>
+      </article>
     </main>
   );
 };

@@ -10,7 +10,7 @@ import RegistroDeJugada from "../components/RegistroDeJugada";
 import IngresarDato from "../components/IngresarDato";
 
 const Game = () => {
-  const gameSecond = 15;
+  const gameSecond = 4;
   const [palabra, setPalabra] = useState<string>("");
   const [listaPalabras, setListaPalabras] = useState<string[]>([]);
   const [puntaje, setPuntaje] = useState<number>(0);
@@ -95,6 +95,7 @@ const Game = () => {
             handleFunc={handlePalabra}
             valorString={palabra}
             setString={setPalabra}
+            placerholder="Ingrese una palabra..."
           />
         </section>
         {listaPalabras.length > 0 && (
