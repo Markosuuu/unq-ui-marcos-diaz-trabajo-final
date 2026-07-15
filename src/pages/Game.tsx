@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 const Game = () => {
-  const gameSecond = 3;
+  const gameSecond = 15;
   const [palabra, setPalabra] = useState<string>("");
   const [listaPalabras, setListaPalabras] = useState<string[]>([]);
 

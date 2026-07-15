@@ -87,6 +87,22 @@
   background-color: #111111e6;
   padding: 20px 10px;
   border-radius: 12px;
-  margin-top: 20px;
+  margin: 20px 0;
   grid-area: palabras;
+  color: #a1cba2;
+  font-weight: 700;
+}
+
+.lista-palabras ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lista-palabras li::after {
+  content: " ->";
+}
+
+.lista-palabras li:last-child::after {
+  content: "";
 }
