@@ -1,11 +1,21 @@
 .score-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
   grid-template-areas:
-    "puntaje leaderboard"
-    "palabras palabras";
+    "titulo titulo"
+    "leaderboard puntaje"
+    "leaderboard palabras";
   gap: 16px;
   padding: 0 20px;
+  margin-top: 30px;
+  justify-items: center;
+  align-items: baseline;
+}
+
+.titulo {
+  font-size: 60px;
+  grid-area: titulo;
+  text-align: center;
 }
 
 .section-puntaje {
@@ -13,37 +23,59 @@
   flex-direction: column;
   gap: 12px;
   text-align: center;
-  background-color: #111111e6;
-  padding: 20px 50px;
+  background-color: #2f3160ee;
+  border: 2px solid #0e1224;
+  border-radius: 8px;
+  padding: 20px 10px;
   border-radius: 12px;
   margin-top: 20px;
   grid-area: puntaje;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 700px;
+}
+
+.section-puntaje span {
+  background-color: #2f3160;
+  border: 2px solid #0e1224;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 24px;
 }
 
 .btn-reiniciar {
   background-color: #4caf50;
-  color: white;
-  border: none;
+  color: #eee;
   border-radius: 8px;
   padding: 10px 20px;
   cursor: pointer;
-  margin-top: 20px;
   text-decoration: none;
+  font-family: "AndyBold";
+  font-size: 24px;
+  background-color: #485e9eee;
+  border: 2px solid #0e1224;
 }
 
 .btn-reiniciar:hover {
-  background-color: #45a049;
+  background-color: #485e9e;
+  border: 2px solid #ffe745;
 }
 
 .leaderBoard {
-  background-color: #111111e6;
-  padding: 20px 16px;
-  border-radius: 12px;
+  background-color: #2f3160ee;
+  border: 2px solid #0e1224;
+  border-radius: 8px;
+  padding: 20px 4px;
   margin-top: 20px;
   grid-area: leaderboard;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 300px;
+  width: 100%;
 }
 
 .leaderBoard ul,
@@ -51,58 +83,64 @@
   list-style: none;
 }
 
-.form-nombre {
+.leaderBoard ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.leaderBoard li {
+  background-color: #2f3160;
+  border: 2px solid #0e1224;
+  border-radius: 8px;
+  padding: 8px 12px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  height: 50px;
-}
-
-.ingresar-nombre {
-  background-color: #333;
-  color: #fff;
-  font-size: 16px;
-  border: 1px solid #555;
-  border-radius: 8px 0 0 8px;
-  height: 100%;
-  padding: 10px;
-}
-
-.btn-nombre {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 0 8px 8px 0;
-  padding: 10px 20px;
-  cursor: pointer;
-  height: 100%;
-}
-
-.btn-nombre:hover {
-  background-color: #45a049;
+  justify-content: space-between;
+  font-size: 24px;
 }
 
 .lista-palabras {
-  background-color: #111111e6;
+  background-color: #2f3160ee;
+  border: 2px solid #0e1224;
+  border-radius: 8px;
   padding: 20px 10px;
-  border-radius: 12px;
   margin: 20px 0;
   grid-area: palabras;
-  color: #a1cba2;
+  color: #eee;
   font-weight: 700;
+  width: 90%;
+  max-width: 800px;
 }
 
 .lista-palabras ul {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  font-size: 24px;
 }
 
+.lista-palabras li {
+  background-color: #23244bee;
+  border: 2px solid #0e1224;
+  border-radius: 8px;
+  padding: 4px 8px;
+  min-width: 150px;
+  text-align: center;
+}
+
+/* 
 .lista-palabras li::after {
   content: " ->";
 }
 
 .lista-palabras li:last-child::after {
   content: "";
+} */
+
+.estadisticas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
