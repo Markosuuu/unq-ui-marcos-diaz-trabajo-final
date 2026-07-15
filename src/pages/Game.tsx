@@ -8,9 +8,10 @@ import RegistroDeJugada from "../components/RegistroDeJugada";
 import IngresarDato from "../components/IngresarDato";
 
 const Game = () => {
-  const gameSecond = 3;
+  const gameSecond = 15;
   const [palabra, setPalabra] = useState<string>("");
   const [listaPalabras, setListaPalabras] = useState<string[]>([]);
+  const [puntaje, setPuntaje] = useState<number>(0);
 
   const [segundos, setSegundos] = useState<number>(gameSecond);
   const [isActivo, setIsActivo] = useState<boolean>(false);
@@ -26,13 +27,6 @@ const Game = () => {
     localStorage.setItem("leaderBoard", JSON.stringify(leaderBoard));
   }, [leaderBoard]);
 
-  const puntaje = () => {
-    return listaPalabras.reduce(
-      (acc: number, palabra: string) => acc + palabra.length,
-      0,
-    );
-  };
-
   useEffect(() => {
     if (!isActivo) return;
 
@@ -40,22 +34,16 @@ const Game = () => {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsActivo(false);
 
-      // TODO: Emprolijar esto
-      if (leaderBoard[leaderBoard.length - 1].puntaje < puntaje()) {
-        navigate("/record", {
-          state: {
-            puntaje: puntaje(),
-            lista: listaPalabras,
-          },
-        });
-      } else {
-        navigate("/score", {
-          state: {
-            puntaje: puntaje(),
-            lista: listaPalabras,
-          },
-        });
-      }
+      const esRecord =
+        leaderBoard.length < 10 ||
+        leaderBoard[leaderBoard.length - 1].puntaje < puntaje;
+
+      navigate(esRecord ? "/record" : "/score", {
+        state: {
+          puntaje: puntaje,
+          lista: listaPalabras,
+        },
+      });
     }
 
     const timer = setTimeout(() => {
@@ -80,6 +68,7 @@ const Game = () => {
     }
 
     setListaPalabras([...listaPalabras, resultado.palabra || ""]);
+    setPuntaje(puntaje + (resultado.palabra?.length || 0));
     setSegundos(gameSecond);
   };
 
@@ -100,7 +89,7 @@ const Game = () => {
         {listaPalabras.length > 0 && (
           <RegistroDeJugada
             palabra={listaPalabras[listaPalabras.length - 1]}
-            puntaje={puntaje()}
+            puntaje={puntaje}
           />
         )}
       </article>
