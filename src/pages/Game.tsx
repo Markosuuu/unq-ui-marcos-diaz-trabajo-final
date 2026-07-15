@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
+
 import style from "../styles/game.module.css";
 import { validarPalabra } from "../services/palabrasService";
 import type { LeaderBoardItem } from "../types/types";
-import { useNavigate } from "react-router";
-import { toast } from "react-toastify";
+
 import RegistroDeJugada from "../components/RegistroDeJugada";
 import IngresarDato from "../components/IngresarDato";
 
@@ -23,10 +25,12 @@ const Game = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    localStorage.setItem("leaderBoard", JSON.stringify(leaderBoard));
-  }, [leaderBoard]);
-
+  /**
+   * Descuenta el timer
+   *
+   * Además, si termina el tiempo redirige
+   * al usuario a la siguiente sección
+   */
   useEffect(() => {
     if (!isActivo) return;
 
@@ -53,6 +57,13 @@ const Game = () => {
     return () => clearTimeout(timer);
   }, [isActivo, segundos]);
 
+  /**
+   * Maneja la palabra ingresada por el usuario contra la api de la cátedra
+   * En caso de haber algún error, levanta un toast indicando el error
+   * De ser la primera palabra ingresada, inicia el juego y empieza a correr el tiempo
+   *
+   * @param palabra Una palabra
+   */
   const handlePalabra = async (palabra: string) => {
     setPalabra("");
 
