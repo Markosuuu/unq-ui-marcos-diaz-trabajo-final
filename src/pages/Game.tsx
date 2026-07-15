@@ -4,9 +4,11 @@ import { validarPalabra } from "../services/palabrasService";
 import type { LeaderBoardItem } from "../types/types";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import RegistroDeJugada from "../components/RegistroDeJugada";
+import IngresarDato from "../components/IngresarDato";
 
 const Game = () => {
-  const gameSecond = 15;
+  const gameSecond = 3;
   const [palabra, setPalabra] = useState<string>("");
   const [listaPalabras, setListaPalabras] = useState<string[]>([]);
 
@@ -84,41 +86,23 @@ const Game = () => {
   return (
     <main>
       <article className={style["container"]}>
-        <h1>Palabras encadenadas</h1>
+        <h1 className={style["titulo"]}>Palabras encadenadas</h1>
         <section>
           <div className={style["timer"]}>
-            {segundos !== 0 && <span>{segundos}</span>}
+            <span>{segundos}</span>
           </div>
-          {segundos !== 0 && (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handlePalabra(palabra);
-              }}
-              className={style["form-palabra"]}
-            >
-              <input
-                type="text"
-                placeholder="Ingrese una palabra..."
-                className={style["ingresar-palabra"]}
-                value={palabra}
-                onChange={(e) => setPalabra(e.target.value)}
-              />
-              <button type="submit" className={style["btn-palabra"]}>
-                Enviar
-              </button>
-            </form>
-          )}
+          <IngresarDato
+            handleFunc={handlePalabra}
+            valorString={palabra}
+            setString={setPalabra}
+          />
         </section>
-        <aside className={style["lista-palabras"]}>
-          <p>
-            Última palabra ingresada:{" "}
-            <span>{listaPalabras[listaPalabras.length - 1]}</span>
-          </p>
-          <p>
-            Puntaje actual: <span>{puntaje()}</span>
-          </p>
-        </aside>
+        {listaPalabras.length > 0 && (
+          <RegistroDeJugada
+            palabra={listaPalabras[listaPalabras.length - 1]}
+            puntaje={puntaje()}
+          />
+        )}
       </article>
     </main>
   );
