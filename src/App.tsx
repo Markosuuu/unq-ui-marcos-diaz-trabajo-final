@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Game from "./pages/Game";
 import ScoreView from "./pages/ScoreView";
+import Record from "./pages/Record";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Game />} />
         <Route path="/score" element={<ScoreView />} />
+        <Route path="/record" element={<Record />} />
         <Route path="*" element={<Game />} />
       </Routes>
       <ToastContainer

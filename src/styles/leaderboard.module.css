@@ -1,0 +1,19 @@
+.titulo {
+  text-align: center;
+  padding-bottom: 12px;
+}
+.tablero-puntajes {
+  border-spacing: 0;
+  text-align: center;
+  width: 300px;
+}
+
+.cabecera-leaderboard td {
+  font-weight: 700;
+}
+
+.tablero-puntajes td {
+  border-bottom: 1px solid #333;
+  padding: 8px;
+  width: 100px;
+}

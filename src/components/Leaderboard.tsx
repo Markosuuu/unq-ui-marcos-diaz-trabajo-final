@@ -1,4 +1,5 @@
 import type { LeaderBoardItem } from "../types/types";
+import style from "../styles/leaderboard.module.css";
 
 type Props = {
   leaderBoard: LeaderBoardItem[];
@@ -6,16 +7,23 @@ type Props = {
 
 const Leaderboard = ({ leaderBoard }: Props) => {
   return (
-    <div>
-      <h2>LeaderBoard</h2>
-      <ul>
+    <>
+      <h2 className={style["titulo"]}>Leaderboard</h2>
+      <table className={style["tablero-puntajes"]}>
+        <tr className={style["cabecera-leaderboard"]}>
+          <td>Puesto</td>
+          <td>Nombre</td>
+          <td>Puntos</td>
+        </tr>
         {leaderBoard.map((item: LeaderBoardItem, index: number) => (
-          <li key={index}>
-            {item.nombre} - {item.puntaje} puntos
-          </li>
+          <tr key={index}>
+            <td>{"N°" + (index + 1)}</td>
+            <td>{item.nombre}</td>
+            <td>{item.puntaje}</td>
+          </tr>
         ))}
-      </ul>
-    </div>
+      </table>
+    </>
   );
 };
 

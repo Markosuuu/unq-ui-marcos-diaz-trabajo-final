@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 const Game = () => {
-  const gameSecond = 2;
+  const gameSecond = 3;
   const [palabra, setPalabra] = useState<string>("");
   const [listaPalabras, setListaPalabras] = useState<string[]>([]);
 
@@ -37,12 +37,23 @@ const Game = () => {
     if (segundos === 0) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsActivo(false);
-      navigate("/score", {
-        state: {
-          puntaje: puntaje(),
-          lista: listaPalabras,
-        },
-      });
+
+      // TODO: Emprolijar esto
+      if (leaderBoard[leaderBoard.length - 1].puntaje < puntaje()) {
+        navigate("/record", {
+          state: {
+            puntaje: puntaje(),
+            lista: listaPalabras,
+          },
+        });
+      } else {
+        navigate("/score", {
+          state: {
+            puntaje: puntaje(),
+            lista: listaPalabras,
+          },
+        });
+      }
     }
 
     const timer = setTimeout(() => {
