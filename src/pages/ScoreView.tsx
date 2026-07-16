@@ -3,6 +3,7 @@ import { Link, useLocation, Navigate } from "react-router";
 import type { LeaderBoardItem } from "../types/types";
 import Leaderboard from "../components/Leaderboard";
 import style from "../styles/scoreView.module.css";
+import ListaPalabras from "../components/ListaPalabras";
 
 const ScoreView = () => {
   const [leaderBoard] = useState<LeaderBoardItem[]>(() => {
@@ -49,13 +50,7 @@ const ScoreView = () => {
             Otra partida
           </Link>
         </section>
-        <aside className={style["lista-palabras"]}>
-          <ul>
-            {lista.map((palabra: string, index: number) => (
-              <li key={index}>{palabra}</li>
-            ))}
-          </ul>
-        </aside>
+        <ListaPalabras lista={lista} />
       </article>
     </main>
   );
