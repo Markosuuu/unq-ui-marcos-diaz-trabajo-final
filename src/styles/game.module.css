@@ -1,0 +1,42 @@
+.container {
+  display: grid;
+  margin-top: 50px;
+  gap: 16px;
+}
+
+.container section {
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Timer */
+
+.timer {
+  padding: 25px;
+  font-size: 48px;
+  text-align: center;
+  background-color: #323c7f;
+  border: 1px solid #0e1224;
+  border-radius: 8px;
+  width: 25%;
+}
+
+.lista-palabras {
+  padding: 30px 20px;
+  width: 100%;
+  font-size: 24px;
+}
+
+.pista {
+  color: #ffe745;
+}
+
+@media screen and (max-width: 480px) {
+  .timer {
+    padding: 8px;
+  }
+}

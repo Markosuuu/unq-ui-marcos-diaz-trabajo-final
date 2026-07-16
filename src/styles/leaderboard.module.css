@@ -1,0 +1,13 @@
+.titulo {
+  text-align: center;
+  padding-bottom: 12px;
+}
+
+.nombres-leaderboard {
+  display: flex;
+  gap: 4px;
+}
+
+.nombres-leaderboard img {
+  object-fit: contain;
+}
