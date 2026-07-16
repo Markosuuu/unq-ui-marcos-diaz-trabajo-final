@@ -43,3 +43,9 @@
   background-color: #485e9e;
   border: 1px solid #ffe745;
 }
+
+@media screen and (max-width: 480px) {
+  .ingresar-palabra {
+    font-size: 20px;
+  }
+}

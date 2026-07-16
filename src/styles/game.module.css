@@ -34,3 +34,9 @@
 .pista {
   color: #ffe745;
 }
+
+@media screen and (max-width: 480px) {
+  .timer {
+    padding: 8px;
+  }
+}
