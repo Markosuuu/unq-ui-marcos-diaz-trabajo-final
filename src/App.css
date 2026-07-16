@@ -1,4 +1,47 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "AndyBold";
+  src: url("./assets/ANDYB.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-  background-color: #1a1a1a;
+  font-family: "AndyBold", sans-serif;
   color: #fff;
+
+  background-image: url("./assets/fondo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 60px;
+  text-align: center;
+}
+
+section,
+aside {
+  background-color: #2f3160ee;
+  border: 2px solid #0e1224;
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 40px;
+  }
 }
