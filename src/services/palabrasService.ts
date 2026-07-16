@@ -35,7 +35,6 @@ export const validarPalabra = async (
 ): Promise<ResultadoValidacion> => {
   const palabraFormateada = formalizarPalabra(palabra);
 
-  // TODO: Consultar que onda esta hermosa cadena de IFs
   if (!soloLetras(palabraFormateada)) {
     return { valido: false, error: "Ingrese palabras válidas." };
   }

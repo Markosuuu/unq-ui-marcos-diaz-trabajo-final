@@ -35,7 +35,3 @@ const App = () => {
 };
 
 export default App;
-
-{
-  //<img src="https://ciaccodavi.de/qbdp/acg/alchemymod.php?coloured=1&id=1180968291" />
-}

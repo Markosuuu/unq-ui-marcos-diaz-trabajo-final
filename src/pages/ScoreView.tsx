@@ -5,6 +5,9 @@ import Leaderboard from "../components/Leaderboard";
 import style from "../styles/scoreView.module.css";
 import ListaPalabras from "../components/ListaPalabras";
 
+import semilla_icono from "../assets/World_seed_icon.png";
+import cartel_icono from "../assets/World_name_icon.png";
+
 const ScoreView = () => {
   const [leaderBoard] = useState<LeaderBoardItem[]>(() => {
     const leaderBoardTemp = localStorage.getItem("leaderBoard");
@@ -32,17 +35,11 @@ const ScoreView = () => {
           <div className={style["estadisticas"]}>
             <h2>Estadisticas</h2>
             <span>
-              <img
-                src="https://static.wikia.nocookie.net/terraria_gamepedia/images/2/25/World_seed_icon.png/revision/latest?cb=20200921104226&format=original"
-                alt=""
-              />
+              <img src={semilla_icono} alt="" />
               Tu puntaje final fue: {puntaje}
             </span>
             <span>
-              <img
-                src="https://static.wikia.nocookie.net/terraria_gamepedia/images/0/00/World_name_icon.png/revision/latest?cb=20200921104151&format=original"
-                alt=""
-              />
+              <img src={cartel_icono} alt="" />
               Cantidad de palabras: {lista.length}
             </span>
           </div>

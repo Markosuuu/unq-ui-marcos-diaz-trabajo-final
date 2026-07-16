@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import style from "../styles/record.module.css";
 import IngresarDato from "../components/IngresarDato";
 
+import mundito_icono from "../assets/Large_world_icon.png";
+import semilla_icono from "../assets/World_seed_icon.png";
+
 const Record = () => {
   const [nombre, setNombre] = useState<string>("");
   const [leaderBoard, setLeaderBoard] = useState<LeaderBoardItem[]>(() => {
@@ -57,17 +60,11 @@ const Record = () => {
           <h2>Nuevo record!</h2>
           <div className={style["estadisticas"]}>
             <span>
-              <img
-                src="https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3f/Large_world_icon.png/revision/latest?cb=20200921104250&format=original"
-                alt=""
-              />
+              <img src={mundito_icono} alt="" />
               Puntaje: {puntaje}
             </span>
             <span>
-              <img
-                src="https://static.wikia.nocookie.net/terraria_gamepedia/images/2/25/World_seed_icon.png/revision/latest?cb=20200921104226&format=original"
-                alt=""
-              />
+              <img src={semilla_icono} alt="" />
               Cantidad de palabras: {lista.length}
             </span>
           </div>
